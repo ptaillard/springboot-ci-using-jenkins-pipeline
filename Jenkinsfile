@@ -1,15 +1,23 @@
 node {
-    stage('Build') {
+
+    currentBuild.result = "SUCCESS"
+
+    try {
+      stage 'Checkout'
 	checkout scm
+      
+      stage 'Build'
         sh "echo Build webapp..."
         sh "mvn compile"
-        /* .. todo .. */
-    }
-    stage('Test') {
+
+      stage 'Test'
         sh "echo Test webapp..."
         sh "mvn test"
     }
-    stage('Deploy') {
-        /* .. todo .. */
+    catch (err) {
+
+        currentBuild.result = "FAILURE"
+
+        throw err
     }
 }
