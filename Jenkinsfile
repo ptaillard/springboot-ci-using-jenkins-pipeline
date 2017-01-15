@@ -1,6 +1,6 @@
 node {
-    git url: 'https://github.com/ptaillard/springboot-ci-using-jenkins-pipeline.git'
     stage('Build') {
+	checkout scm
         sh "echo Build webapp..."
         sh "mvn compile"
         /* .. todo .. */
